@@ -1,9 +1,10 @@
-import discord
+﻿import discord
+from discord import emoji
 import dotenv
 import os
 dotenv.load_dotenv()
 token = os.getenv("TOKEN")
-UID = "703989551613345793"
+UID = 703989551613345793
 intents = discord.Intents.default()
 intents.message_content = True
 intents.messages = True
@@ -15,9 +16,12 @@ async def on_message(message):
         return
     if message.author.id == UID:
         try:
-            await message.add_reaction(":egg:")
+            await message.add_reaction("🥚")
         except discord.Forbidden:
             print("invalid permission")
-        except discord.HTTPException:
-            print("http exception")
+        except discord.HTTPException as e:
+            print(e)
+        except Exception as e:
+            print(e)
+    print(message.author)
 client.run(token)
